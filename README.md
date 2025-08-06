@@ -60,36 +60,53 @@ Query rewriting(쿼리 재작성)은 검색 시스템이나 AI 기반 응답 시
 사용자의 원본 검색 쿼리를 검색 엔진에 더 친화적인 형태로 수정하여 검색 결과의 정확도와 관련성을 높이는 쿼리 재작성(Query Rewriting) 프로젝트입니다.
 
 ---
-T5는 구글(Google)이 개발한 매우 강력하고 활용도 높은 인공지능 언어 모델입니다.
+#!/bin/bash
 
-T5는 Text-to-Text Transfer Transformer 의 줄임말로, 이름에 모든 핵심 개념이 담겨 있습니다.
+# --- 예시 1: 영어-한국어 번역 ---
+# 'translate English to Korean: ' 이라는 접두사를 사용하여 번역 작업을 지시합니다.
+echo "--- 1. 영어-한국어 번역 요청 ---"
+curl -X POST \
+     -H "Content-Type: application/json" \
+     -d '{"input_text": "translate English to Korean: \"Hello, world\""}' \
+     https://api.example-t5-provider.com/v1/generate
 
-쉽게 말해 "모든 언어 문제를 '텍스트를 텍스트로 바꾸는' 하나의 방식으로 통일한 모델" 이라고 이해하시면 됩니다.
+# 예상되는 API 응답 (JSON 형식):
+# {
+#   "output_text": "안녕하세요"
+# }
 
-T5의 가장 중요한 특징: "Text-to-Text"
-기존의 AI 모델들은 번역용 모델, 요약용 모델, 질문-답변용 모델처럼 각 기능에 따라 구조가 조금씩 달랐습니다.
+echo -e "\n\n" # 줄바꿈
 
-하지만 T5는 이 모든 과제를 '명령어(텍스트)를 주면, 결과(텍스트)를 생성하는' 방식으로 통일했습니다.
+# --- 예시 2: 긴 텍스트 요약 ---
+# 'summarize: ' 접두사를 사용하여 요약 작업을 지시합니다.
+echo "--- 2. 뉴스 기사 요약 요청 ---"
+curl -X POST \
+     -H "Content-Type: application/json" \
+     -d '{"input_text": "summarize: \"The James Webb Space Telescope (JWST) is a space telescope designed primarily to conduct infrared astronomy. As the largest optical telescope in space, its high resolution and sensitivity allow it to view objects too old, distant, or faint for the Hubble Space Telescope.\""}' \
+     https://api.example-t5-provider.com/v1/generate
 
-예를 들어, T5에게는 다음과 같이 **작업 지시(prefix)**를 내릴 수 있습니다.
+# 예상되는 API 응답 (JSON 형식):
+# {
+#   "output_text": "제임스 웹 우주 망원경은 적외선 천문학을 위한 우주 망원경으로, 허블 망원경보다 더 멀고 오래된 천체를 관측할 수 있습니다."
+# }
 
-번역 시키기
+echo -e "\n\n" # 줄바꿈
 
-입력: translate English to Korean: "Hello, world"
+# --- 예시 3: 문법 교정 ---
+# 여기서는 별도의 접두사 없이 문맥만으로 작업을 유추하게 하거나,
+# 'fix grammar: ' 또는 'correct this: ' 같은 접두사를 사용할 수 있습니다.
+echo "--- 3. 문법 교정 요청 ---"
+curl -X POST \
+     -H "Content-Type: application/json" \
+     -d '{"input_text": "correct this: \"She no went to the store.\""}' \
+     https://api.example-t5-provider.com/v1/generate
 
-출력: 안녕하세요
+# 예상되는 API 응답 (JSON 형식):
+# {
+#   "output_text": "She did not go to the store."
+# }
 
-요약 시키기
-
-입력: summarize: [아주 긴 뉴스 기사 내용]
-
-출력: [세 문장으로 요약된 뉴스]
-
-문법 교정 시키기
-
-입력: correct this: "She no went to the store."
-
-출력: She did not go to the store.
+echo -e "\n"
 
 이처럼 어떤 작업이든 **'명령 텍스트'**를 입력하면 **'결과 텍스트'**를 출력하는 만능(all-in-one) 프레임워크를 사용하는 것이 T5의 핵심입니다.
 

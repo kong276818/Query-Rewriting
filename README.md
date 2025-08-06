@@ -104,8 +104,7 @@ T5의 구조와 학습
 #!/usr/bin/env bash
 set -euo pipefail
 
-
-모델 요약
+### 모델 요약
 이 모델은 검색 쿼리 재작성에 특화된 생성 모델로, 시퀀스-투-시퀀스(sequence-to-sequence) 아키텍처를 사용하여 재작성된 쿼리를 생성합니다.
 강화학습(Reinforcement Learning) 프레임워크를 적용하여 성능을 향상시키며, 정책 경사(Policy Gradient) 알고리즘을 통합하였습니다.
 보상 함수는 키워드를 패러프레이즈하여 생성 쿼리의 다양성을 높이는 데 초점을 맞추어 설계되었습니다.

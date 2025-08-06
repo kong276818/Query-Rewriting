@@ -60,53 +60,6 @@ Query rewriting(쿼리 재작성)은 검색 시스템이나 AI 기반 응답 시
 사용자의 원본 검색 쿼리를 검색 엔진에 더 친화적인 형태로 수정하여 검색 결과의 정확도와 관련성을 높이는 쿼리 재작성(Query Rewriting) 프로젝트입니다.
 
 ---
-#!/bin/bash
-
-# --- 예시 1: 영어-한국어 번역 ---
-# 'translate English to Korean: ' 이라는 접두사를 사용하여 번역 작업을 지시합니다.
-echo "--- 1. 영어-한국어 번역 요청 ---"
-curl -X POST \
-     -H "Content-Type: application/json" \
-     -d '{"input_text": "translate English to Korean: \"Hello, world\""}' \
-     https://api.example-t5-provider.com/v1/generate
-
-# 예상되는 API 응답 (JSON 형식):
-# {
-#   "output_text": "안녕하세요"
-# }
-
-echo -e "\n\n" # 줄바꿈
-
-# --- 예시 2: 긴 텍스트 요약 ---
-# 'summarize: ' 접두사를 사용하여 요약 작업을 지시합니다.
-echo "--- 2. 뉴스 기사 요약 요청 ---"
-curl -X POST \
-     -H "Content-Type: application/json" \
-     -d '{"input_text": "summarize: \"The James Webb Space Telescope (JWST) is a space telescope designed primarily to conduct infrared astronomy. As the largest optical telescope in space, its high resolution and sensitivity allow it to view objects too old, distant, or faint for the Hubble Space Telescope.\""}' \
-     https://api.example-t5-provider.com/v1/generate
-
-# 예상되는 API 응답 (JSON 형식):
-# {
-#   "output_text": "제임스 웹 우주 망원경은 적외선 천문학을 위한 우주 망원경으로, 허블 망원경보다 더 멀고 오래된 천체를 관측할 수 있습니다."
-# }
-
-echo -e "\n\n" # 줄바꿈
-
-# --- 예시 3: 문법 교정 ---
-# 여기서는 별도의 접두사 없이 문맥만으로 작업을 유추하게 하거나,
-# 'fix grammar: ' 또는 'correct this: ' 같은 접두사를 사용할 수 있습니다.
-echo "--- 3. 문법 교정 요청 ---"
-curl -X POST \
-     -H "Content-Type: application/json" \
-     -d '{"input_text": "correct this: \"She no went to the store.\""}' \
-     https://api.example-t5-provider.com/v1/generate
-
-# 예상되는 API 응답 (JSON 형식):
-# {
-#   "output_text": "She did not go to the store."
-# }
-
-echo -e "\n"
 
 이처럼 어떤 작업이든 **'명령 텍스트'**를 입력하면 **'결과 텍스트'**를 출력하는 만능(all-in-one) 프레임워크를 사용하는 것이 T5의 핵심입니다.
 
